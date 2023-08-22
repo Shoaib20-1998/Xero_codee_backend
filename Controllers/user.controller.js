@@ -1,9 +1,9 @@
 const { db, table } = require('../db.config.js')
 const jwt = require('jsonwebtoken')
 const passport = require('passport');
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 require('dotenv').config()
 const client = require('./Redis.js')
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 
 // Function to retrieve a user by ID (assuming the ID is unique)

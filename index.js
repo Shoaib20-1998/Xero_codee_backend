@@ -5,7 +5,6 @@ const cors = require("cors");
 require('./Controllers/Passport-config');
 require('./Controllers/GooglePassport')
 const passport= require('passport')
-const cookieSession=require('cookie-session')
 const session = require('express-session')
 const app=express()
 app.use(cors());
