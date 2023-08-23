@@ -16,9 +16,9 @@ app.use(passport.session());
 
 
 app.use('/',Routes)
-app.get('/',(req,res)=>{
-    res.send('<a href="/auth/google">Auth with google</a>')
-})
+// app.get('/',(req,res)=>{
+//     res.send('<a href="/auth/google">Auth with google</a>')
+// })
 
 // app.get('/login',(req,res)=>{
 //     res.send('<a href="https://github.com/login/oauth/authorize?client_id=805124a881ee240807c0&scope=repo">Auth with Git</a>')
