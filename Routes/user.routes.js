@@ -30,8 +30,8 @@ Routes.get('/getgoogleusername', (req, res) => {
 
 Routes.get('/auth/google/callback',
     passport.authenticate('google', {
-        successRedirect: 'http://localhost:3000/dashboard',
-        failureRedirect: 'http://localhost:3000/login'
+        successRedirect: 'https://xerocodee-mauve.vercel.app/dashboard',
+        failureRedirect: 'https://xerocodee-mauve.vercel.app/login'
     }));
 
 
