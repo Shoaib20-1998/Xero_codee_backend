@@ -125,7 +125,7 @@ const GithubAuth = async (req, res) => {
         "content-type": "application/json"
       },
       body: JSON.stringify({
-        client_id: process.env.Gihub_Clinet_ID,
+        client_id: process.env.Gihub_Client_ID,
         client_secret: process.env.Gihub_Client_Secret,
         code: code
       })
