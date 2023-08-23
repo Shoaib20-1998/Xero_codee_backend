@@ -10,7 +10,7 @@ passport.use(new GoogleStrategy({
     passReqToCallback   : true,
   },
   function(request, accessToken, refreshToken, profile, done) {    
-    request.session.username = profile.displayName;
+    Client.SET('user', profile.displayName) 
     return done( null,profile);
 
   }

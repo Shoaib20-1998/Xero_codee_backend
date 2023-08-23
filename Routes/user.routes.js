@@ -20,11 +20,11 @@ Routes.get('/auth/google',
             ['email', 'profile']
     }
     ));
-Client.GET('user', (err, value) => {
-        a=value       
-})   
+ 
 Routes.get('/getgoogleusername', (req, res) => {
-    res.send(a)
+    Client.GET('user', (err, value) => {
+        res.send(value)      
+   })  
 })
 
 
@@ -39,16 +39,16 @@ Routes.get('/auth/google/callback',
 
 
 //GithubAuth
-let b;
+
 Routes.get('/auth/github',
     passport.authenticate('github', { scope: ['user:email'] }));
 
 
-Client.GET('gituser', (err, value) => {
-    b=value
-})
+
 Routes.get('/getgithubusername', (req, res) => {
-    res.send(b)
+    Client.GET('gituser', (err, value) => {
+        res.send(value)
+    })
 })
 Routes.get('/auth/github/callback',
     passport.authenticate('github', { failureRedirect: 'http://localhost:3000/login' }),
