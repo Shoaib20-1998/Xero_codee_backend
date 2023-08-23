@@ -8,14 +8,19 @@ require('./Controllers/GithubPassport')
 const passport= require('passport')
 const session = require('express-session')
 const app=express()
+
 app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
-
 app.use(express.json())
-
+app.set('trust proxy',1)
 app.use(session({ 
     secret: 'cats',
     resave:true,
-    saveUninitialized:true
+    saveUninitialized:true,
+    cookie:{
+        sameSite:'none',
+        secure:true,
+        maxAge:1000*60*60*24*7
+    }
 }));
 app.use(passport.initialize());
 app.use(passport.session());

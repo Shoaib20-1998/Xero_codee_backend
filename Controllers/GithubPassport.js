@@ -16,7 +16,6 @@ passport.use(new GitHubStrategy({
   }
 ));
 
-// http://localhost:8080/auth/github
 passport.serializeUser((user, done) => {
   done(null, user);
 })
