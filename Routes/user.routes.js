@@ -51,10 +51,10 @@ Routes.get('/getgithubusername', (req, res) => {
     })
 })
 Routes.get('/auth/github/callback',
-    passport.authenticate('github', { failureRedirect: 'http://localhost:3000/login' }),
+    passport.authenticate('github', { failureRedirect: 'https://xerocodee-mauve.vercel.app/login' }),
     function (req, res) {
         // Successful authentication, redirect home.
-        res.redirect('http://localhost:3000/dashboard');
+        res.redirect('https://xerocodee-mauve.vercel.app/dashboard');
     });
 
 
