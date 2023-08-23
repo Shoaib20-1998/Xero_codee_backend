@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 const passport = require('passport');
 require('dotenv').config()
 const client = require('./Redis.js')
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
 
 // Function to retrieve a user by ID (assuming the ID is unique)
@@ -102,7 +102,11 @@ const AuthFail = (req, res) => {
 
 //GoogleAuthSuccess
 const AuthSuccess = async (req, res) => {
-  res.send(req.user.displayName)
+  try {
+    res.send(req.user.displayName)
+  } catch (error) {
+    res.send("something went wrong")
+  }
 }
 
 //SessionDistroy
@@ -130,17 +134,17 @@ const GithubAuth = async (req, res) => {
         code: code
       })
     })
-     .then((res) => res.json())
+      .then((res) => res.json())
     const userdetails = await fetch(`https://api.github.com/user`, {
       headers: {
         Authorization: `Bearer ${accessToken.access_token}`
       }
     }).then((res) => res.json())
-    
+
     res.send(userdetails)
-    
+
   } catch (error) {
-    res.send(error)
+    res.send("something went wrong")
   }
 
 }
