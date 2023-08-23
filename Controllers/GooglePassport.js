@@ -9,9 +9,8 @@ passport.use(new GoogleStrategy({
     callbackURL: '/auth/google/callback',
     passReqToCallback   : true,
   },
-  function(request, accessToken, refreshToken, profile, done) {   
-  
-    Client.SET('user', profile.displayName)
+  function(request, accessToken, refreshToken, profile, done) {    
+    request.session.username = profile.displayName;
     return done( null,profile);
 
   }

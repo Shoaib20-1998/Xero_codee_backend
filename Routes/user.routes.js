@@ -12,7 +12,7 @@ Routes.post('/signup', SignupUser)
 Routes.post('/signin', LoginUser)
 
 
-
+let a;
 //GoogleAuth
 Routes.get('/auth/google',
     passport.authenticate('google', {
@@ -20,6 +20,13 @@ Routes.get('/auth/google',
             ['email', 'profile']
     }
     ));
+Client.GET('user', (err, value) => {
+        a=value       
+})   
+Routes.get('/getgoogleusername', (req, res) => {
+    res.send(a)
+})
+
 
 Routes.get('/auth/google/callback',
     passport.authenticate('google', {
@@ -27,19 +34,22 @@ Routes.get('/auth/google/callback',
         failureRedirect: 'http://localhost:3000/login'
     }));
 
-Routes.get('/getgoogleusername', (req, res) => {
-    Client.GET('user', (err, value) => {
-        res.send(value)
-    })
-})
+
 
 
 
 //GithubAuth
+let b;
 Routes.get('/auth/github',
     passport.authenticate('github', { scope: ['user:email'] }));
 
 
+Client.GET('gituser', (err, value) => {
+    b=value
+})
+Routes.get('/getgithubusername', (req, res) => {
+    res.send(b)
+})
 Routes.get('/auth/github/callback',
     passport.authenticate('github', { failureRedirect: 'http://localhost:3000/login' }),
     function (req, res) {
@@ -47,11 +57,7 @@ Routes.get('/auth/github/callback',
         res.redirect('http://localhost:3000/dashboard');
     });
 
-Routes.get('/getgithubusername', (req, res) => {
-    Client.GET('gituser', (err, value) => {
-        res.send(value)
-    })
-})
+
 
 
 Routes.get('/logout', SessionDestroy)

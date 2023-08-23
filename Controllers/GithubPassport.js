@@ -3,7 +3,6 @@ const GitHubStrategy = require('passport-github').Strategy;
 const passport = require('passport');
 const Client = require('./Redis');
 
-console.log(process.env.Github_Client_Secret, "id", process.env.Github_Clinet_ID)
 passport.use(new GitHubStrategy({
   clientID: process.env.Github_Clinet_ID,
   clientSecret: process.env.Github_Client_Secret,
