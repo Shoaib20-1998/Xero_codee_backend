@@ -94,21 +94,6 @@ const ReadAllUsers = async (req, res) => {
   }
 }
 
-//GoogleAuthFail
-const AuthFail = (req, res) => {
-  res.send("something went wrong")
-}
-
-
-//GoogleAuthSuccess
-const AuthSuccess = async (req, res) => {
-  try {
-    res.send(req.user.displayName)
-  } catch (error) {
-    res.send("something went wrong")
-  }
-}
-
 //SessionDistroy
 const SessionDestroy = async (req, res) => {
   req.session.destroy(function (e) {
@@ -149,5 +134,5 @@ const GithubAuth = async (req, res) => {
 
 }
 module.exports = {
-  GithubAuth, SignupUser, LoginUser, ReadAllUsers, getUserByEmail, getUserById, AuthFail, AuthSuccess, SessionDestroy
+  GithubAuth, SignupUser, LoginUser, ReadAllUsers, getUserByEmail, getUserById, SessionDestroy
 }
