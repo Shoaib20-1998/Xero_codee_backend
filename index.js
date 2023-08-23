@@ -4,21 +4,27 @@ require('dotenv').config()
 const cors = require("cors");
 require('./Controllers/Passport-config');
 require('./Controllers/GooglePassport')
+require('./Controllers/GithubPassport')
 const passport= require('passport')
 const session = require('express-session')
 const app=express()
-app.use(cors());
+app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
+
 app.use(express.json())
 
-app.use(session({ secret: 'cats'}));
+app.use(session({ 
+    secret: 'cats',
+    resave:true,
+    saveUninitialized:true
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 
 
 app.use('/',Routes)
-app.get('/',(req,res)=>{
-    res.send('<a href="/auth/google">Auth with google</a>')
-})
+// app.get('/',(req,res)=>{
+//     res.send('<a href="/auth/google">Auth with google</a>')
+// })
 
 // app.get('/login',(req,res)=>{
 //     res.send('<a href="https://github.com/login/oauth/authorize?client_id=805124a881ee240807c0&scope=repo">Auth with Git</a>')

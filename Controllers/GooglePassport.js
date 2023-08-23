@@ -1,4 +1,5 @@
 const passport = require('passport');
+const Client = require('./Redis');
 var GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
 require('dotenv').config()
 
@@ -8,8 +9,11 @@ passport.use(new GoogleStrategy({
     callbackURL: '/auth/google/callback',
     passReqToCallback   : true,
   },
-  function(request, accessToken, refreshToken, profile, done) {
-      return done( null,profile);
+  function(request, accessToken, refreshToken, profile, done) {   
+  
+    Client.SET('user', profile.displayName)
+    return done( null,profile);
+
   }
 ));
 

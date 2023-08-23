@@ -1,9 +1,9 @@
 const { db, table } = require('../db.config.js')
 const jwt = require('jsonwebtoken')
 const passport = require('passport');
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 require('dotenv').config()
 const client = require('./Redis.js')
-const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
 
 // Function to retrieve a user by ID (assuming the ID is unique)
@@ -79,7 +79,6 @@ const LoginUser = (req, res, next) => {
 };
 
 
-
 // getAllusers
 const ReadAllUsers = async (req, res) => {
   const params = {
@@ -94,6 +93,7 @@ const ReadAllUsers = async (req, res) => {
   }
 }
 
+
 //SessionDistroy
 const SessionDestroy = async (req, res) => {
   req.session.destroy(function (e) {
@@ -102,37 +102,6 @@ const SessionDestroy = async (req, res) => {
 }
 
 
-//GithubAuth
-const GithubAuth = async (req, res) => {
-  const { code } = req.query
-  console.log(code)
-  try {
-    let accessToken = await fetch('https://github.com/login/oauth/access_token', {
-      method: "POST",
-      headers: {
-        Accept: 'application/json',
-        "content-type": "application/json"
-      },
-      body: JSON.stringify({
-        client_id: process.env.Gihub_Client_ID,
-        client_secret: process.env.Gihub_Client_Secret,
-        code: code
-      })
-    })
-      .then((res) => res.json())
-    const userdetails = await fetch(`https://api.github.com/user`, {
-      headers: {
-        Authorization: `Bearer ${accessToken.access_token}`
-      }
-    }).then((res) => res.json())
-
-    res.send(userdetails)
-
-  } catch (error) {
-    res.send("something went wrong")
-  }
-
-}
 module.exports = {
-  GithubAuth, SignupUser, LoginUser, ReadAllUsers, getUserByEmail, getUserById, SessionDestroy
+  SignupUser, LoginUser, ReadAllUsers, getUserByEmail, getUserById, SessionDestroy
 }
