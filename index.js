@@ -10,7 +10,7 @@ const session = require('express-session')
 const app=express()
 
 
-app.use(cors({exposedHeaders: ['Access-Control-Allow-Origin'], origin: ['https://xerocodee-mauve.vercel.app','http://localhost:3000/'], credentials: true }));
+app.use(cors({exposedHeaders: ['Access-Control-Allow-Origin'], origin: ['https://xerocodee-mauve.vercel.app','http://localhost:3000'], credentials: true }));
 app.use(express.json())
 app.set('trust proxy',1)
 app.use(session({ 
